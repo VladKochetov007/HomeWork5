@@ -32,7 +32,7 @@ class Sentence:
         elif isinstance(other, str):
             result.words.append(other)
         else:
-            raise TypeError("Можна додавати лише екземпляри класу Sentence або рядкові літерали")
+            raise TypeError("Can only add instances of Sentence class or string literals")
         
         return result
     
@@ -45,7 +45,7 @@ class Sentence:
             while other in result.words:
                 result.words.remove(other)
         else:
-            raise TypeError("Можна віднімати лише екземпляри класу Sentence або рядкові літерали")
+            raise TypeError("Can only subtract instances of Sentence class or string literals")
         
         return result
     

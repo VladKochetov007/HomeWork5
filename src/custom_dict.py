@@ -40,7 +40,7 @@ class CustomDict:
     
     def __iadd__(self, other):
         if not isinstance(other, CustomDict):
-            raise TypeError("Правий операнд має бути екземпляром класу CustomDict")
+            raise TypeError("Right operand must be an instance of CustomDict")
         
         for key, value in other._data.items():
             if key in self._data:
@@ -52,14 +52,14 @@ class CustomDict:
     
     def _validate_key(self, key):
         if not isinstance(key, str):
-            raise TypeError("Ключ має бути рядком")
+            raise TypeError("Key must be a string")
         
         if not re.match(r'^[а-яіїєґА-ЯІЇЄҐa-zA-Z]+$', key):
-            raise ValueError("Ключ має містити лише літери українського або англійського алфавіту")
+            raise ValueError("Key must contain only Ukrainian or English alphabet letters")
     
     def _validate_value(self, value):
         if not isinstance(value, (int, float)):
-            raise TypeError("Значення має бути числовим типом (int, float)")
+            raise TypeError("Value must be a numeric type (int, float)")
     
     def keys(self):
         return self._data.keys()

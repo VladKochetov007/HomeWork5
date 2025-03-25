@@ -53,10 +53,10 @@ class Polynom:
     
     def __setitem__(self, index, value):
         if not isinstance(value, (int, float)):
-            raise TypeError("Коефіцієнти мають бути числами")
+            raise TypeError("Coefficients must be numbers")
         
         if index < 0:
-            raise IndexError("Індекс не може бути від'ємним")
+            raise IndexError("Index cannot be negative")
         
         if index >= len(self.coefficients):
             self.coefficients.extend([0] * (index - len(self.coefficients) + 1))
@@ -139,10 +139,10 @@ class Polynom:
     def __truediv__(self, other):
         if isinstance(other, (int, float)):
             if other == 0:
-                raise ZeroDivisionError("Ділення на нуль")
+                raise ZeroDivisionError("Division by zero")
             return Polynom([c / other for c in self.coefficients])
         
-        raise NotImplementedError("Ділення поліномів не підтримується")
+        raise NotImplementedError("Polynomial division is not supported")
     
     def derivative(self):
         if len(self.coefficients) <= 1:

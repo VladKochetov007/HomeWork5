@@ -41,7 +41,7 @@ class StringDict:
     
     def __iadd__(self, other):
         if not isinstance(other, StringDict):
-            raise TypeError("Правий операнд має бути екземпляром класу StringDict")
+            raise TypeError("Right operand must be an instance of StringDict")
         
         for key, value in other._data.items():
             if key in self._data:
@@ -55,24 +55,24 @@ class StringDict:
     
     def _validate_key(self, key):
         if not isinstance(key, str):
-            raise TypeError("Ключ має бути рядком")
+            raise TypeError("Key must be a string")
         
         if not re.match(r'^[а-яіїєґА-ЯІЇЄҐa-zA-Z]+$', key):
-            raise ValueError("Ключ має містити лише літери українського або англійського алфавіту")
+            raise ValueError("Key must contain only Ukrainian or English alphabet letters")
     
     def _validate_value(self, value):
         if isinstance(value, list):
             for item in value:
                 if not isinstance(item, str):
-                    raise TypeError("Елементи списку значень мають бути рядками")
+                    raise TypeError("Value list elements must be strings")
                 
                 if not re.match(r'^[а-яіїєґА-ЯІЇЄҐa-zA-Z]+$', item):
-                    raise ValueError("Елементи списку значень мають містити лише літери українського або англійського алфавіту")
+                    raise ValueError("Value list elements must contain only Ukrainian or English alphabet letters")
         elif isinstance(value, str):
             if not re.match(r'^[а-яіїєґА-ЯІЇЄҐa-zA-Z]+$', value):
-                raise ValueError("Значення має містити лише літери українського або англійського алфавіту")
+                raise ValueError("Value must contain only Ukrainian or English alphabet letters")
         else:
-            raise TypeError("Значення має бути рядком або списком рядків")
+            raise TypeError("Value must be a string or list of strings")
     
     def keys(self):
         return self._data.keys()

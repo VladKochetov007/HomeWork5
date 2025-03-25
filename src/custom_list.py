@@ -8,7 +8,7 @@ class CustomList:
             self._items = []
             for item in items:
                 if not isinstance(item, int):
-                    raise TypeError("CustomList може містити тільки цілі числа")
+                    raise TypeError("CustomList can only contain integers")
                 self._items.append(item)
     
     def __str__(self):
@@ -22,7 +22,7 @@ class CustomList:
     
     def __setitem__(self, index, value):
         if not isinstance(value, int):
-            raise TypeError("CustomList може містити тільки цілі числа")
+            raise TypeError("CustomList can only contain integers")
         self._items[index] = value
     
     def __len__(self):
@@ -37,7 +37,7 @@ class CustomList:
         elif isinstance(other, int):
             self._items.append(other)
         else:
-            raise TypeError("Правий операнд має бути CustomList або ціле число")
+            raise TypeError("Right operand must be CustomList or integer")
         return self
     
     def __isub__(self, other):
@@ -47,12 +47,12 @@ class CustomList:
             while other in self._items:
                 self._items.remove(other)
         else:
-            raise TypeError("Правий операнд має бути CustomList або ціле число")
+            raise TypeError("Right operand must be CustomList or integer")
         return self
     
     def __imul__(self, other):
         if not isinstance(other, int):
-            raise TypeError("Правий операнд має бути цілим числом")
+            raise TypeError("Right operand must be integer")
         if other <= 0:
             self._items = []
         else:

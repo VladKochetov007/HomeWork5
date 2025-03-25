@@ -23,13 +23,13 @@ class Vector:
     
     def __add__(self, other):
         if not isinstance(other, Vector) or len(self) != len(other):
-            raise ValueError("Можна додавати лише вектори однакової розмірності")
+            raise ValueError("Can only add vectors of the same dimension")
         
         return type(self)([a + b for a, b in zip(self.components, other.components)])
     
     def __sub__(self, other):
         if not isinstance(other, Vector) or len(self) != len(other):
-            raise ValueError("Можна віднімати лише вектори однакової розмірності")
+            raise ValueError("Can only subtract vectors of the same dimension")
         
         return type(self)([a - b for a, b in zip(self.components, other.components)])
     
@@ -40,13 +40,13 @@ class Vector:
         if isinstance(other, Vector) and len(self) == len(other):
             return sum(a * b for a, b in zip(self.components, other.components))
         
-        raise ValueError("Несумісні типи для операції множення")
+        raise ValueError("Incompatible types for multiplication operation")
     
     def __rmul__(self, other):
         if isinstance(other, (int, float)):
             return self * other
         
-        raise ValueError("Несумісні типи для операції множення")
+        raise ValueError("Incompatible types for multiplication operation")
     
     def length(self):
         return math.sqrt(sum(c * c for c in self.components))
@@ -54,7 +54,7 @@ class Vector:
     def normalize(self):
         length = self.length()
         if length == 0:
-            raise ValueError("Неможливо нормалізувати нульовий вектор")
+            raise ValueError("Cannot normalize zero vector")
         
         return type(self)([c / length for c in self.components])
 
@@ -86,7 +86,7 @@ class Vector2D(Vector):
     
     def cross(self, other):
         if not isinstance(other, Vector2D):
-            raise ValueError("Векторний добуток визначений лише для Vector2D")
+            raise ValueError("Cross product is only defined for Vector2D")
         
         return self.x * other.y - self.y * other.x
 
@@ -126,7 +126,7 @@ class Vector3D(Vector):
     
     def cross(self, other):
         if not isinstance(other, Vector3D):
-            raise ValueError("Векторний добуток визначений лише для Vector3D")
+            raise ValueError("Cross product is only defined for Vector3D")
         
         return Vector3D(
             self.y * other.z - self.z * other.y,
@@ -180,11 +180,11 @@ class Matrix:
             elif hasattr(value, '__iter__') and len(value) == self.cols:
                 self.data[index] = list(value)
             else:
-                raise ValueError("Неправильні розміри для присвоєння")
+                raise ValueError("Invalid dimensions for assignment")
     
     def __add__(self, other):
         if not isinstance(other, Matrix) or self.rows != other.rows or self.cols != other.cols:
-            raise ValueError("Можна додавати лише матриці однакового розміру")
+            raise ValueError("Can only add matrices of the same size")
         
         result = type(self)(self.rows, self.cols)
         for i in range(self.rows):
@@ -195,7 +195,7 @@ class Matrix:
     
     def __sub__(self, other):
         if not isinstance(other, Matrix) or self.rows != other.rows or self.cols != other.cols:
-            raise ValueError("Можна віднімати лише матриці однакового розміру")
+            raise ValueError("Can only subtract matrices of the same size")
         
         result = type(self)(self.rows, self.cols)
         for i in range(self.rows):
@@ -233,13 +233,13 @@ class Matrix:
                         result.data[i][j] += self.data[i][k] * other.data[k][j]
             return result
         
-        raise ValueError("Несумісні типи для операції множення")
+        raise ValueError("Incompatible types for multiplication operation")
     
     def __rmul__(self, other):
         if isinstance(other, (int, float)):
             return self * other
         
-        raise ValueError("Несумісні типи для операції множення")
+        raise ValueError("Incompatible types for multiplication operation")
     
     def __call__(self):
         return self.determinant()
@@ -268,7 +268,7 @@ class Matrix:
     
     def determinant(self):
         if self.rows != self.cols:
-            raise ValueError("Визначник визначений лише для квадратних матриць")
+            raise ValueError("Determinant is only defined for square matrices")
         
         if self.rows == 1:
             return self.data[0][0]

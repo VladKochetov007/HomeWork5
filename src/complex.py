@@ -76,14 +76,14 @@ class Complex:
     def __truediv__(self, other):
         if isinstance(other, (int, float)):
             if other == 0:
-                raise ZeroDivisionError("Ділення на нуль")
+                raise ZeroDivisionError("Division by zero")
             return Complex(self.real / other, self.imag / other)
         
         if not isinstance(other, Complex):
             other = Complex(other)
         
         if other.real == 0 and other.imag == 0:
-            raise ZeroDivisionError("Ділення на нуль")
+            raise ZeroDivisionError("Division by zero")
         
         denominator = other.real ** 2 + other.imag ** 2
         return Complex(
@@ -111,7 +111,7 @@ class Complex:
         if isinstance(other, Complex):
             return self._power_complex(other)
         
-        raise TypeError("Невідомий тип")
+        raise TypeError("Unknown type")
     
     def _power_float(self, power):
         r, theta = self.polar()

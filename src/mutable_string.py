@@ -29,7 +29,7 @@ class MutableString:
             if isinstance(value, str) and len(value) == 1:
                 self._chars[index] = value
             else:
-                raise ValueError("Можна присвоїти лише один символ")
+                raise ValueError("Can only assign a single character")
     
     def __add__(self, other):
         result = MutableString(self)
@@ -43,7 +43,7 @@ class MutableString:
     
     def __mul__(self, times):
         if not isinstance(times, int):
-            raise TypeError("Множник має бути цілим числом")
+            raise TypeError("Multiplier must be an integer")
         
         result = MutableString()
         for _ in range(times):
