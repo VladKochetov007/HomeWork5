@@ -97,3 +97,10 @@ class Rational:
     
     def __repr__(self) -> str:
         return f"({self.n} / {self.d})"
+    
+    def __eq__(self, other):
+        if isinstance(other, int):
+            other = Rational(other)
+        if not isinstance(other, Rational):
+            return False
+        return self.n * other.d == other.n * self.d

@@ -33,24 +33,54 @@ def process_expression(expression: str) -> Rational:
     
     return result
 
-def main():
+def process_task1():
     with open('input01.txt', 'r') as file:
         expressions = file.readlines()
     
+    results = []
+    
+    for expr in expressions:
+        if expr.strip():
+            result = process_expression(expr.strip())
+            results.append(result)
+            print(f"{expr.strip()} = {result}")
+    
+    return results
+
+def process_task2():
+    with open('input01.txt', 'r') as file:
+        content = file.read()
+    
+    rationals = []
+    for token in content.split():
+        if token not in {'+', '-', '*', '/'}:
+            try:
+                rational = Rational(token)
+                rationals.append(rational)
+            except ValueError:
+                pass
+    
+    rational_list = RationalList(rationals)
+    total_sum = rational_list.sum()
+    
+    return rational_list, total_sum
+
+def main():
+    print("Task 1 - Evaluate expressions:")
+    results = process_task1()
+    
     results_dict = ProtectedDictInt()
-    
-    results_list = RationalList()
-    
-    for i, expr in enumerate(expressions):
-        result = process_expression(expr.strip())
+    for i, result in enumerate(results):
         results_dict[i] = result
-        results_list += result
     
-    print("Results stored in ProtectedDict:")
+    print("\nResults stored in ProtectedDict:")
     print(results_dict)
     
-    print("\nAll results in RationalList:")
-    print(results_list)
+    print("\nTask 2 - Sum of all rational numbers:")
+    rational_list, total_sum = process_task2()
+    
+    print(f"All rationals in list: {rational_list}")
+    print(f"Sum of all rational numbers: {total_sum}")
 
 if __name__ == "__main__":
     main()
