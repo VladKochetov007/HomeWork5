@@ -28,6 +28,9 @@ class ProtectedDictInt:
     def __str__(self):
         return str(self._data)
 
+    def keys(self):
+        return self._data.keys()
+
     def __add__(self, other):
         result = ProtectedDictInt(self._data)
         if isinstance(other, ProtectedDictInt):
